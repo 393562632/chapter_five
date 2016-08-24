@@ -1,0 +1,54 @@
+
+#MaxMetaspaceSize
+#项目启动命令：第一组参数  QPS 540
+mvn spring-boot:run -Drun.jvmArguments="-Xloggc:d:/work/projects/chapter_five/chapter_five_biz/gc.log
+-server
+-XX:+PrintGCDetails
+-XX:+HeapDumpOnOutOfMemoryError
+-Xmx32M
+-Xms32M
+-XX:+UseSerialGC
+-XX:PermSize=32M"
+
+#项目启动命令：第二组参数  QPS 640   没有指定初始堆大小
+mvn spring-boot:run -Drun.jvmArguments="-Xloggc:d:/work/projects/chapter_five/chapter_five_biz/gc.log
+-server
+-XX:+PrintGCDetails
+-XX:+HeapDumpOnOutOfMemoryError
+-Xmx512M
+-XX:+UseSerialGC
+-XX:PermSize=32M"
+
+#项目启动命令：第三组参数  QPS 668  指定初始堆大小
+mvn spring-boot:run -Drun.jvmArguments="-Xloggc:d:/work/projects/chapter_five/chapter_five_biz/gc.log
+-server
+-XX:+PrintGCDetails
+-XX:+HeapDumpOnOutOfMemoryError
+-Xmx512M
+-Xms240M
+-XX:+UseSerialGC
+-XX:PermSize=32M"
+
+
+#项目启动命令：第四组参数  QPS 668  使用ParrellOldGC
+mvn spring-boot:run -Drun.jvmArguments="-Xloggc:d:/work/projects/chapter_five/chapter_five_biz/gc.log
+-server
+-XX:+PrintGCDetails
+-XX:+HeapDumpOnOutOfMemoryError
+-Xmx512M
+-Xms64M
+-XX:MaxMetaspaceSize=128M
+-XX:+UseParallelGC
+-XX:+UseParallelOldGC
+-XX:ParallelGCThreads=4"
+
+#项目启动命令：第五组参数  QPS 690  使用ParrellOldGC 没有设置MaxMetaspaceSize的大小
+mvn spring-boot:run -Drun.jvmArguments="-Xloggc:d:/work/projects/chapter_five/chapter_five_biz/gc.log
+-server
+-XX:+PrintGCDetails
+-XX:+HeapDumpOnOutOfMemoryError
+-Xmx512M
+-Xms64M
+-XX:+UseParallelGC
+-XX:+UseParallelOldGC
+-XX:ParallelGCThreads=4"
